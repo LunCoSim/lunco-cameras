@@ -85,3 +85,5 @@ func rotate_camera(move):
 func add_camera_shake_trauma(amount):
 	camera.add_trauma(amount)
 
+func set_aiming(aiming):
+	current_aim = aiming
