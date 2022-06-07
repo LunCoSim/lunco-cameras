@@ -32,7 +32,11 @@ onready var camera = get_node(@"Camera")
 
 	
 ##------------
-#
+
+func _process(delta):
+	if target:
+		global_transform.origin = get_node(target).global_transform.origin
+		
 func _physics_process(delta):
 	var camera_move = Vector2(
 			Input.get_action_strength("camera_right") - Input.get_action_strength("camera_left"),
