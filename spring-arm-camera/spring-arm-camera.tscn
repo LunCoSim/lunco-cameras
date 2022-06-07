@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://addons/spring-arm-camera/camera_noise_shake_effect.gd" type="Script" id=1]
-[ext_resource path="res://addons/spring-arm-camera/spring-arm-camera.gd" type="Script" id=2]
+[ext_resource path="res://addons/spring-arm-camera/spring-arm-camera/camera_noise_shake_effect.gd" type="Script" id=1]
+[ext_resource path="res://addons/spring-arm-camera/spring-arm-camera/spring-arm-camera.gd" type="Script" id=2]
 
 [sub_resource type="Animation" id=33]
 tracks/0/type = "value"
