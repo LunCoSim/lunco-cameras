@@ -75,7 +75,8 @@ spring_length = 2.4
 [node name="Camera" type="Camera" parent="CameraRot/SpringArm"]
 transform = Transform( 1, 1.42109e-14, -2.84217e-14, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 current = true
-far = 300.0
+near = 0.01
+far = 6000.0
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": "Translated when aiming."

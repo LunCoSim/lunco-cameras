@@ -20,6 +20,11 @@ export onready var camera = get_node("InnerGimbal/Camera")
 
 var zoom = 1
 
+# Commands
+# rotate
+# change distance
+# change target
+
 func _ready():
 	$InnerGimbal/Camera.translation.z = distance
 #	camera = $InnerGimbal/Camera
@@ -78,3 +83,5 @@ func _process(delta):
 	if target:
 		global_transform.origin = get_node(target).global_transform.origin
 		
+func set_current():
+	camera.current = true
