@@ -3,11 +3,11 @@ extends Spatial
 
 export (NodePath) var target
 
-export var CAMERA_MOUSE_ROTATION_SPEED = 0.001
-export var CAMERA_CONTROLLER_ROTATION_SPEED = 3.0
+export var CAMERA_CONTROLLER_ROTATION_SPEED = 0.1
 # A minimum angle lower than or equal to -90 breaks movement if the player is looking upward.
 export var CAMERA_X_ROT_MIN = -89.9
 export var CAMERA_X_ROT_MAX = 70
+export var CAMERA_AIM_SPEED = 0.5
 
 #------------
 
@@ -21,7 +21,7 @@ export var camera_x = Vector3.ZERO
 #------------
 
 var aiming = false
-
+var camera_speed = CAMERA_CONTROLLER_ROTATION_SPEED
 
 #------------
 
@@ -45,13 +45,14 @@ var camera_move := Vector2.ZERO
 func _process(delta):
 	if target:
 		global_transform.origin = get_node(target).global_transform.origin
-		
-func _physics_process(delta):
-	var camera_speed_this_frame = delta * CAMERA_CONTROLLER_ROTATION_SPEED
-	if aiming:
-		camera_speed_this_frame *= 0.5
-	rotate_camera(camera_move * camera_speed_this_frame)
-
+	
+	if aiming != current_aim:
+		aiming = current_aim
+		if aiming:
+			camera_animation.play("shoot")
+		else:
+			camera_animation.play("far")
+			
 	camera_basis = camera_rot.global_transform.basis
 	camera_z = camera_basis.z
 	camera_x = camera_basis.x
@@ -60,23 +61,15 @@ func _physics_process(delta):
 	camera_z = camera_z.normalized()
 	camera_x.y = 0
 	camera_x = camera_x.normalized()
-
-	if aiming != current_aim:
-		aiming = current_aim
-		if aiming:
-			camera_animation.play("shoot")
-		else:
-			camera_animation.play("far")
-
+		
+	# Basis
+	# 2D basis
 # ---------------------------
 func move(vect):
 	camera_move = vect
 
 func rotate_relative(relative):
-	var camera_speed_this_frame = CAMERA_MOUSE_ROTATION_SPEED
-	if aiming:
-		camera_speed_this_frame *= 0.75
-	rotate_camera(relative * camera_speed_this_frame)
+	rotate_camera(relative * camera_speed)
 		
 func project_ray_origin(ch_pos):
 	return camera.project_ray_origin(ch_pos)
@@ -99,6 +92,10 @@ func add_camera_shake_trauma(amount):
 
 func set_aiming(aiming):
 	current_aim = aiming
+	if(aiming):
+		camera_speed = CAMERA_AIM_SPEED * CAMERA_CONTROLLER_ROTATION_SPEED
+	else:
+		camera_speed = CAMERA_CONTROLLER_ROTATION_SPEED
 	
 func set_current():
 	camera.current = true
