@@ -99,3 +99,17 @@ func set_aiming(aiming):
 	
 func set_current():
 	camera.current = true
+
+#---------------------
+
+func get_rotation_quat():
+	return global_transform.basis.get_rotation_quat()
+
+func get_plain_basis() -> Basis:
+	var camera_basis = Basis.IDENTITY
+				
+	camera_basis.x = camera_x
+	camera_basis.y = Vector3.ZERO
+	camera_basis.z = camera_z
+	
+	return camera_basis
