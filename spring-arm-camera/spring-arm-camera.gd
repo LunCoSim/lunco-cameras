@@ -100,6 +100,15 @@ func set_aiming(aiming):
 func set_current():
 	camera.current = true
 
+func spring_length(spring_delta: float):
+	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length + spring_delta
+	
+func inc_spring_length():
+	$CameraRot/SpringArm.set = $CameraRot/SpringArm.spring_length + 0.1
+
+func dec_spring_length():
+	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length - 0.1
+	
 #---------------------
 
 func get_rotation_quat():
