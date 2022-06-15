@@ -18,11 +18,14 @@ export var camera_basis = Vector3.ZERO
 export var camera_z = Vector3.ZERO
 export var camera_x = Vector3.ZERO
 
+export var SPRING_LENGTH: float = 3 setget set_spring_length
+
 #------------
 
 var aiming = false
 var camera_speed = CAMERA_CONTROLLER_ROTATION_SPEED
 
+#export var spring_length: float set
 #------------
 
 onready var camera_animation = $Animation
@@ -100,6 +103,9 @@ func set_aiming(aiming):
 func set_current():
 	camera.current = true
 
+func set_spring_length(length: float):
+	$CameraRot/SpringArm.spring_length = length
+	
 func spring_length(spring_delta: float):
 	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length + spring_delta
 	
