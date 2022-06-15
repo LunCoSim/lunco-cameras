@@ -68,7 +68,7 @@ __meta__ = {
 }
 
 [node name="SpringArm" type="SpringArm" parent="CameraRot"]
-transform = Transform( -1, -1.11444e-07, 3.06191e-07, 0, 0.939693, 0.34202, -3.25841e-07, 0.34202, -0.939693, 0, 0, 0 )
+transform = Transform( -1, 2.45929e-09, -8.73882e-08, -4.24088e-08, 0.860467, 0.509507, 7.64476e-08, 0.509507, -0.860467, 0, 2, 0 )
 spring_length = 2.4
 
 [node name="Camera" type="Camera" parent="CameraRot/SpringArm"]

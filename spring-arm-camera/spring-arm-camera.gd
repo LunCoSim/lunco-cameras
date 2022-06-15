@@ -1,7 +1,11 @@
 class_name SpringArmCamera
 extends Spatial
 
-export (NodePath) var target
+export (NodePath) var Target
+
+export var SPRING_LENGTH: float = 3 setget set_spring_length
+export var FOLLOW_HEIGHT: float = 2 setget set_follow_height
+export var FOLLOW_ANGLE: float = 30 setget set_follow_angle
 
 export var CAMERA_CONTROLLER_ROTATION_SPEED = 0.1
 # A minimum angle lower than or equal to -90 breaks movement if the player is looking upward.
@@ -18,7 +22,7 @@ export var camera_basis = Vector3.ZERO
 export var camera_z = Vector3.ZERO
 export var camera_x = Vector3.ZERO
 
-export var SPRING_LENGTH: float = 3 setget set_spring_length
+
 
 #------------
 
@@ -32,10 +36,12 @@ onready var camera_animation = $Animation
 onready var camera_rot = $CameraRot
 onready var camera_spring_arm = $CameraRot/SpringArm
 onready var camera = $CameraRot/SpringArm/Camera
-
+onready var target := get_node(Target)
 	
 ##------------
-
+func set_target(_target: Spatial=null):
+	target = _target
+	
 ## Commands
 ## attach to object
 ## rotate
@@ -44,17 +50,17 @@ onready var camera = $CameraRot/SpringArm/Camera
 ## change FOV
 
 var camera_move := Vector2.ZERO
-			
+var initial_position: Vector3
+
+func reset_position():
+	global_transform.origin = initial_position
+	
+func _onready():
+	initial_position = global_transform.origin
+
 func _process(delta):
 	if target:
-		global_transform.origin = get_node(target).global_transform.origin
-	
-	if aiming != current_aim:
-		aiming = current_aim
-		if aiming:
-			camera_animation.play("shoot")
-		else:
-			camera_animation.play("far")
+		global_transform.origin = target.global_transform.origin
 			
 	camera_basis = camera_rot.global_transform.basis
 	camera_z = camera_basis.z
@@ -93,17 +99,28 @@ func rotate_camera(move):
 func add_camera_shake_trauma(amount):
 	camera.add_trauma(amount)
 
-func set_aiming(aiming):
-	current_aim = aiming
+func set_aiming(_aiming):
+	current_aim = _aiming
+	
+	if aiming != current_aim:
+		aiming = current_aim
+		if aiming:
+			camera_animation.play("shoot")
+		else:
+			camera_animation.play("far")
+			
 	if(aiming):
 		camera_speed = CAMERA_AIM_SPEED * CAMERA_CONTROLLER_ROTATION_SPEED
 	else:
 		camera_speed = CAMERA_CONTROLLER_ROTATION_SPEED
+		
+	
 	
 func set_current():
 	camera.current = true
 
 func set_spring_length(length: float):
+	SPRING_LENGTH = length
 	$CameraRot/SpringArm.spring_length = length
 	
 func spring_length(spring_delta: float):
@@ -114,7 +131,16 @@ func inc_spring_length():
 
 func dec_spring_length():
 	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length - 0.1
-	
+
+func set_follow_height(_height: float):
+	FOLLOW_HEIGHT = _height
+	$CameraRot/SpringArm.translate(Vector3(0, FOLLOW_HEIGHT, 0))
+
+func set_follow_angle(_angle: float):
+	FOLLOW_ANGLE = _angle
+	$CameraRot/SpringArm.rotate(Vector3(FOLLOW_ANGLE, 0, 0))
+
+
 #---------------------
 
 func get_rotation_quat():
