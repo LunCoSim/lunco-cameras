@@ -36,7 +36,7 @@ onready var camera_animation = $Animation
 onready var camera_rot = $CameraRot
 onready var camera_spring_arm = $CameraRot/SpringArm
 onready var camera = $CameraRot/SpringArm/Camera
-onready var target := get_node(Target)
+onready var target := get_node(Target) if Target else null
 	
 ##------------
 func set_target(_target: Spatial=null):
@@ -140,7 +140,12 @@ func set_follow_angle(_angle: float):
 	FOLLOW_ANGLE = _angle
 	$CameraRot/SpringArm.rotate(Vector3(FOLLOW_ANGLE, 0, 0))
 
-
+func add_excluded_object(rid):
+	$CameraRot/SpringArm.add_excluded_object(rid)
+	
+func remove_excluded_object (rid) -> bool:
+	return $CameraRot/SpringArm.remove_excluded_object(rid)
+	
 #---------------------
 
 func get_rotation_quat():
@@ -150,7 +155,7 @@ func get_plain_basis() -> Basis:
 	var camera_basis = Basis.IDENTITY
 				
 	camera_basis.x = camera_x
-	camera_basis.y = Vector3.ZERO
+	camera_basis.y = Vector3(0, 1, 0)
 	camera_basis.z = camera_z
 	
 	return camera_basis
