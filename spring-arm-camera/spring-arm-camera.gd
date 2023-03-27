@@ -1,26 +1,26 @@
 class_name SpringArmCamera
 extends Spatial
 
-export (NodePath) var Target
+@export (NodePath) var Target
 
-export var SPRING_LENGTH: float = 3 setget set_spring_length
-export var FOLLOW_HEIGHT: float = 2 setget set_follow_height
-export var FOLLOW_ANGLE: float = 30 setget set_follow_angle
+@export var SPRING_LENGTH: float = 3 setget set_spring_length
+@export var FOLLOW_HEIGHT: float = 2 setget set_follow_height
+@export var FOLLOW_ANGLE: float = 30 setget set_follow_angle
 
-export var CAMERA_CONTROLLER_ROTATION_SPEED = 0.1
+@export var CAMERA_CONTROLLER_ROTATION_SPEED = 0.1
 # A minimum angle lower than or equal to -90 breaks movement if the player is looking upward.
-export var CAMERA_X_ROT_MIN = -89.9
-export var CAMERA_X_ROT_MAX = 70
-export var CAMERA_AIM_SPEED = 0.5
+@export var CAMERA_X_ROT_MIN = -89.9
+@export var CAMERA_X_ROT_MAX = 70
+@export var CAMERA_AIM_SPEED = 0.5
 
 #------------
 
-export var current_aim = false
-export var camera_x_rot = 0.0
+@export var current_aim = false
+@export var camera_x_rot = 0.0
 
-export var camera_basis = Vector3.ZERO
-export var camera_z = Vector3.ZERO
-export var camera_x = Vector3.ZERO
+@export var camera_basis = Vector3.ZERO
+@export var camera_z = Vector3.ZERO
+@export var camera_x = Vector3.ZERO
 
 
 
@@ -32,11 +32,11 @@ var camera_speed = CAMERA_CONTROLLER_ROTATION_SPEED
 #export var spring_length: float set
 #------------
 
-onready var camera_animation = $Animation
-onready var camera_rot = $CameraRot
-onready var camera_spring_arm = $CameraRot/SpringArm
-onready var camera = $CameraRot/SpringArm/Camera
-onready var target := get_node(Target) if Target else null
+@onready var camera_animation = $Animation
+@onready var camera_rot = $CameraRot
+@onready var camera_spring_arm = $CameraRot/SpringArm
+@onready var camera = $CameraRot/SpringArm/Camera
+@onready var target := get_node(Target) if Target else null
 	
 ##------------
 func set_target(_target: Spatial=null):

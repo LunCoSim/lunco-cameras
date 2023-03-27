@@ -1,4 +1,4 @@
-extends Camera
+extends Camera3D
 
 # Constant values of the effect.
 const SPEED = 1.0
@@ -12,16 +12,16 @@ const MAX_TRAUMA = 1.2
 var start_rotation = rotation
 var trauma = 0.0
 var time = 0.0
-var noise = OpenSimplexNoise.new()
+#var noise = OpenSimplexNoise.new()
 var noise_seed = randi()
 
 
 func _ready():
-	noise.seed = noise_seed
-	noise.octaves = 1
-	noise.period = 256.0
-	noise.persistence = 0.5
-	noise.lacunarity = 1.0
+#	noise.seed = noise_seed
+#	noise.octaves = 1
+#	noise.period = 256.0
+#	noise.persistence = 0.5
+#	noise.lacunarity = 1.0
 
 	# This variable is reset if the camera position is changed by other scripts,
 	# such as when zooming in/out or focusing on a different position.
@@ -59,5 +59,6 @@ func apply_shake(delta):
 
 # Return a random float in range(-1, 1) using OpenSimplex noise.
 func get_noise_value(seed_value, t):
-	noise.seed = seed_value
-	return noise.get_noise_1d(t)
+	return 0
+#	noise.seed = seed_value
+#	return noise.get_noise_1d(t)
