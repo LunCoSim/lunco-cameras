@@ -71,7 +71,7 @@ script = ExtResource("2")
 transform = Transform3D(-1, 2.45929e-09, -8.73882e-08, -4.24088e-08, 0.860467, 0.509507, 7.64476e-08, 0.509507, -0.860467, 0, 2, 0)
 spring_length = 2.4
 
-[node name="Camera3D" type="Camera3D" parent="CameraRot/SpringArm"]
+[node name="Camera" type="Camera3D" parent="CameraRot/SpringArm"]
 transform = Transform3D(1, 7.81597e-14, 1.42109e-14, 3.55271e-15, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("1")
 
