@@ -141,7 +141,8 @@ func set_follow_angle(_angle: float):
 	$CameraRot/SpringArm.rotate(Vector3(FOLLOW_ANGLE, 0, 0))
 
 func add_excluded_object(rid):
-	$CameraRot/SpringArm.add_excluded_object(rid)
+	if rid:
+		$CameraRot/SpringArm.add_excluded_object(rid)
 	
 func remove_excluded_object (rid) -> bool:
 	if rid:
