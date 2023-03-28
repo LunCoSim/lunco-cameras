@@ -1,11 +1,11 @@
 class_name SpringArmCamera
-extends Spatial
+extends Node3D
 
-@export (NodePath) var Target
+@export var Target: NodePath
 
-@export var SPRING_LENGTH: float = 3 setget set_spring_length
-@export var FOLLOW_HEIGHT: float = 2 setget set_follow_height
-@export var FOLLOW_ANGLE: float = 30 setget set_follow_angle
+@export var SPRING_LENGTH: float = 3: set = set_spring_length
+@export var FOLLOW_HEIGHT: float = 2: set = set_follow_height
+@export var FOLLOW_ANGLE: float = 30: set = set_follow_angle
 
 @export var CAMERA_CONTROLLER_ROTATION_SPEED = 0.1
 # A minimum angle lower than or equal to -90 breaks movement if the player is looking upward.
@@ -39,7 +39,7 @@ var camera_speed = CAMERA_CONTROLLER_ROTATION_SPEED
 @onready var target := get_node(Target) if Target else null
 	
 ##------------
-func set_target(_target: Spatial=null):
+func set_target(_target: Node3D=null):
 	target = _target
 	
 ## Commands
@@ -91,7 +91,7 @@ func rotate_camera(move):
 	# After relative transforms, camera needs to be renormalized.
 	orthonormalize()
 	camera_x_rot += move.y
-	camera_x_rot = clamp(camera_x_rot, deg2rad(CAMERA_X_ROT_MIN), deg2rad(CAMERA_X_ROT_MAX))
+	camera_x_rot = clamp(camera_x_rot, deg_to_rad(CAMERA_X_ROT_MIN), deg_to_rad(CAMERA_X_ROT_MAX))
 	camera_rot.rotation.x = camera_x_rot
 
 #------------------
@@ -127,7 +127,7 @@ func spring_length(spring_delta: float):
 	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length + spring_delta
 	
 func inc_spring_length():
-	$CameraRot/SpringArm.set = $CameraRot/SpringArm.spring_length + 0.1
+	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length + 0.1
 
 func dec_spring_length():
 	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length - 0.1
@@ -144,12 +144,15 @@ func add_excluded_object(rid):
 	$CameraRot/SpringArm.add_excluded_object(rid)
 	
 func remove_excluded_object (rid) -> bool:
-	return $CameraRot/SpringArm.remove_excluded_object(rid)
+	if rid:
+		return $CameraRot/SpringArm.remove_excluded_object(rid)
+	else:
+		return true
 	
 #---------------------
 
 func get_rotation_quat():
-	return global_transform.basis.get_rotation_quat()
+	return global_transform.basis.get_rotation_quaternion()
 
 func get_plain_basis() -> Basis:
 	var camera_basis = Basis.IDENTITY

@@ -64,9 +64,6 @@ _data = {
 [node name="SpringArmCamera" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
 script = ExtResource("2")
-__meta__ = {
-"_editor_description_": "Handles Y rotation (yaw)."
-}
 
 [node name="CameraRot" type="Node3D" parent="."]
 
