@@ -151,9 +151,14 @@ func remove_excluded_object (rid) -> bool:
 		return true
 	
 #---------------------
-
-func get_rotation_quat():
+func get_camera_x_rot():
+	return $CameraRot.rotation.x
+	
+func get_camera_base_quaternion() -> Quaternion:
 	return global_transform.basis.get_rotation_quaternion()
+
+func get_camera_rotation_basis() -> Basis:
+	return $CameraRot.global_transform.basis
 
 func get_plain_basis() -> Basis:
 	var camera_basis = Basis.IDENTITY
