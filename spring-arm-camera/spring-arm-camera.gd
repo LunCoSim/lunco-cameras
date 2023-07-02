@@ -1,9 +1,9 @@
 class_name SpringArmCamera
 extends Node3D
 
-@export var Target: NodePath
+@export var target: Node3D
 
-@export var SPRING_LENGTH: float = 3: set = set_spring_length
+@export var SPRING_LENGTH: float = 4000: set = set_spring_length
 @export var FOLLOW_HEIGHT: float = 2: set = set_follow_height
 @export var FOLLOW_ANGLE: float = 30: set = set_follow_angle
 
@@ -36,11 +36,9 @@ var camera_speed = CAMERA_CONTROLLER_ROTATION_SPEED
 @onready var camera_rot = $CameraRot
 @onready var camera_spring_arm = $CameraRot/SpringArm
 @onready var camera = $CameraRot/SpringArm/Camera
-@onready var target := get_node(Target) if Target else null
 	
 ##------------
-func set_target(_target: Node3D=null):
-	target = _target
+
 	
 ## Commands
 ## attach to object
@@ -55,10 +53,11 @@ var initial_position: Vector3
 func reset_position():
 	global_transform.origin = initial_position
 	
-func _onready():
+func _ready():
 	initial_position = global_transform.origin
 
 func _process(delta):
+#	print(target)
 	if target:
 		global_transform.origin = target.global_transform.origin
 			
@@ -138,7 +137,8 @@ func set_follow_height(_height: float):
 
 func set_follow_angle(_angle: float):
 	FOLLOW_ANGLE = _angle
-	$CameraRot/SpringArm.rotate(Vector3(FOLLOW_ANGLE, 0, 0))
+	$CameraRot/SpringArm.rotate(Vector3(1, 0, 0), FOLLOW_ANGLE)
+#	Node3D.rotate()
 
 func add_excluded_object(rid):
 	if rid:
