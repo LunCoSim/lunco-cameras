@@ -3,7 +3,7 @@ extends Node3D
 
 @export var target: Node3D
 
-@export var SPRING_LENGTH: float = 4000: set = set_spring_length
+@export var SPRING_LENGTH: float = 3: set = set_spring_length
 @export var FOLLOW_HEIGHT: float = 2: set = set_follow_height
 @export var FOLLOW_ANGLE: float = 30: set = set_follow_angle
 
@@ -120,7 +120,7 @@ func set_current():
 
 func set_spring_length(length: float):
 	SPRING_LENGTH = length
-	$CameraRot/SpringArm.spring_length = length
+#	$CameraRot/SpringArm.spring_length = length
 	
 func spring_length(spring_delta: float):
 	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length + spring_delta
@@ -133,7 +133,7 @@ func dec_spring_length():
 
 func set_follow_height(_height: float):
 	FOLLOW_HEIGHT = _height
-	$CameraRot/SpringArm.translate(Vector3(0, FOLLOW_HEIGHT, 0))
+#	$CameraRot/SpringArm.translate(Vector3(0, FOLLOW_HEIGHT, 0))
 
 func set_follow_angle(_angle: float):
 	FOLLOW_ANGLE = _angle
