@@ -1,6 +1,7 @@
 class_name SpringArmCamera
 extends Node3D
 
+## Camera Far side can't be more than 1000000 otherwise there is an error
 @export var target: Node3D
 
 @export var SPRING_LENGTH: float = 3: set = set_spring_length
@@ -35,7 +36,7 @@ var camera_speed = CAMERA_CONTROLLER_ROTATION_SPEED
 @onready var camera_animation = $Animation
 @onready var camera_rot = $CameraRot
 @onready var camera_spring_arm = $CameraRot/SpringArm
-@onready var camera = $CameraRot/SpringArm/Camera
+@onready @export var camera = $CameraRot/SpringArm/Camera
 	
 ##------------
 
@@ -94,9 +95,6 @@ func rotate_camera(move):
 	camera_rot.rotation.x = camera_x_rot
 
 #------------------
-
-func add_camera_shake_trauma(amount):
-	camera.add_trauma(amount)
 
 func set_aiming(_aiming):
 	current_aim = _aiming
