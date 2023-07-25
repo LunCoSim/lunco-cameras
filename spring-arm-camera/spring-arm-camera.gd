@@ -78,7 +78,8 @@ func move(vect):
 	camera_move = vect
 
 func rotate_relative(relative):
-	rotate_camera(relative * camera_speed)
+	if relative.length_squared() > 0.0: #TBD: Why is this check here?
+		rotate_camera(relative * camera_speed)
 		
 func project_ray_origin(ch_pos):
 	return camera.project_ray_origin(ch_pos)
