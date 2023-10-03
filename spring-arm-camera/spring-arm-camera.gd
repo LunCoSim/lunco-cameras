@@ -119,16 +119,13 @@ func set_current():
 
 func set_spring_length(length: float):
 	SPRING_LENGTH = length
-#	$CameraRot/SpringArm.spring_length = length
+	$CameraRot/SpringArm.spring_length = SPRING_LENGTH
 	
-func spring_length(spring_delta: float):
-	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length + spring_delta
-	
-func inc_spring_length():
-	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length + 0.1
+func inc_spring_length(spring_delta: float = 0.1):
+	SPRING_LENGTH = SPRING_LENGTH + spring_delta
 
-func dec_spring_length():
-	$CameraRot/SpringArm.spring_length = $CameraRot/SpringArm.spring_length - 0.1
+func dec_spring_length(spring_delta: float = 0.1):
+	SPRING_LENGTH = SPRING_LENGTH - spring_delta
 
 func set_follow_height(_height: float):
 	FOLLOW_HEIGHT = _height
