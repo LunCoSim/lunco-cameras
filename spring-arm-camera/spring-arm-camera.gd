@@ -1,3 +1,4 @@
+@icon("res://addons/lunco-cameras/spring-arm-camera/spring_arm_camera.svg")
 class_name SpringArmCamera
 extends Node3D
 
