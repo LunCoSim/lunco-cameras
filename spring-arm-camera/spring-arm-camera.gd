@@ -129,7 +129,7 @@ func dec_spring_length(spring_delta: float = 0.1):
 
 func set_follow_height(_height: float):
 	FOLLOW_HEIGHT = _height
-#	$CameraRot/SpringArm.translate(Vector3(0, FOLLOW_HEIGHT, 0))
+	$CameraRot/SpringArm.translate(Vector3(0, FOLLOW_HEIGHT, 0))
 
 func set_follow_angle(_angle: float):
 	FOLLOW_ANGLE = _angle
