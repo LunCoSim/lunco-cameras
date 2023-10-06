@@ -119,11 +119,15 @@ func set_current():
 	camera.current = true
 
 func set_spring_length(length: float):
+	
+	
+	if length < 0.1: # Setting min follow distance. TBD to settings
+		length = 0.1
 	SPRING_LENGTH = length
 	$CameraRot/SpringArm.spring_length = SPRING_LENGTH
 	
 func inc_spring_length(spring_delta: float = 0.1):
-	SPRING_LENGTH = SPRING_LENGTH + spring_delta
+	SPRING_LENGTH = SPRING_LENGTH + spring_delta #TBD Better scale curve
 
 func dec_spring_length(spring_delta: float = 0.1):
 	SPRING_LENGTH = SPRING_LENGTH - spring_delta
