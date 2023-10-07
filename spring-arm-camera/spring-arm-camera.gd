@@ -119,8 +119,6 @@ func set_current():
 	camera.current = true
 
 func set_spring_length(length: float):
-	
-	
 	if length < 0.1: # Setting min follow distance. TBD to settings
 		length = 0.1
 	SPRING_LENGTH = length
@@ -134,7 +132,7 @@ func dec_spring_length(spring_delta: float = 0.1):
 
 func set_follow_height(_height: float):
 	FOLLOW_HEIGHT = _height
-	$CameraRot/SpringArm.translate(Vector3(0, FOLLOW_HEIGHT, 0))
+	$CameraRot/SpringArm.position = Vector3(0, FOLLOW_HEIGHT, 0)
 
 func set_follow_angle(_angle: float):
 	FOLLOW_ANGLE = _angle
