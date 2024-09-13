@@ -56,8 +56,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tvol0"]
 _data = {
-"far": SubResource("33"),
-"shoot": SubResource("34")
+&"far": SubResource("33"),
+&"shoot": SubResource("34")
 }
 
 [node name="SpringArmCamera" type="Node3D"]
